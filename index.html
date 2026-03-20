@@ -1,210 +1,724 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Ritik Jain - Software Developer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap (only for spacing, ATS safe) -->
+  <!-- Google Fonts for modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
   <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --accent-color: #3b82f6;
+      --text-dark: #1f2937;
+      --text-muted: #6b7280;
+      --bg-light: #f8fafc;
+      --border-color: #e5e7eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #000;
-      background: #fff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text-dark);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       line-height: 1.6;
       font-size: 14px;
+      min-height: 100vh;
+      padding: 40px 20px;
     }
-    h1, h2, h3 {
+
+    .resume-container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* Header Section with Gradient */
+    .header-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 40px;
+      position: relative;
+    }
+
+    .header-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transform: translate(50%, -50%);
+    }
+
+    .header-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      transform: translate(-50%, 50%);
+    }
+
+    .name-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
     }
-    h1 { font-size: 24px; }
-    h2 {
+
+    .job-title {
       font-size: 18px;
-      margin-top: 24px;
-      border-bottom: 1px solid #000;
-      padding-bottom: 4px;
+      font-weight: 500;
+      opacity: 0.95;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
     }
-    h3 {
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .contact-item i {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .contact-item a {
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .contact-item a:hover {
+      border-bottom-color: white;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 40px;
+    }
+
+    /* Section Styling */
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Summary Box */
+    .summary-box {
+      background: var(--bg-light);
+      border-left: 4px solid var(--primary-color);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-category {
+      background: var(--bg-light);
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .skill-category-title {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .skill-list {
+      font-size: 13px;
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+
+    /* Experience Cards */
+    .experience-card {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .experience-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+    }
+
+    .experience-card:hover {
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .exp-company {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .exp-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .exp-date {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .exp-date i {
+      font-size: 12px;
+    }
+
+    .certificate-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .certificate-link:hover {
+      text-decoration: underline;
+    }
+
+    .exp-list {
+      padding-left: 0;
+      list-style: none;
+      margin-bottom: 0;
+    }
+
+    .exp-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .exp-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    }
+
+    .project-title {
       font-size: 15px;
-      margin-top: 12px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
     }
-    p { margin-bottom: 6px; }
-    ul { padding-left: 18px; margin-bottom: 8px; }
-    li { margin-bottom: 4px; }
-    a { color: #000; text-decoration: underline; }
-    .section { margin-bottom: 20px; }
-    .text-muted { font-size: 13px; }
+
+    .project-link {
+      font-size: 12px;
+      color: var(--primary-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    .project-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Education */
+    .education-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px;
+      background: var(--bg-light);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .edu-info h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .edu-school {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .edu-grade {
+      text-align: right;
+    }
+
+    .grade-badge {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .resume-container {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .experience-card:hover,
+      .project-card:hover {
+        transform: none;
+        box-shadow: none;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px 10px;
+      }
+
+      .header-section {
+        padding: 24px;
+      }
+
+      .name-title {
+        font-size: 28px;
+      }
+
+      .main-content {
+        padding: 24px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .exp-header {
+        flex-direction: column;
+      }
+
+      .education-item {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .edu-grade {
+        text-align: left;
+      }
+    }
   </style>
+<base target="_blank">
 </head>
 
 <body>
-<div class="container my-4">
+<div class="resume-container">
 
   <!-- Header -->
-  <h1>Ritik Jain</h1>
-  <p><strong>Software Developer</strong></p>
-  <p>
-    Email: <a href="mailto:jainritik829@gmail.com">jainritik829@gmail.com</a> |
-    Phone: +91 8518900153 |
-    Location: Jabalpur, Madhya Pradesh
-  </p>
-  <p>
-    LinkedIn: <a href="https://www.linkedin.com/in/ritik-jain-451r1b/">linkedin.com/in/ritik-jain</a> |
-    GitHub: <a href="https://github.com/Ritikjain91">github.com/Ritikjain91</a> |
-    Portfolio: <a href="https://ritikportfolio-sepia.vercel.app/">ritikportfolio-sepia.vercel.app</a>
-  </p>
+  <div class="header-section">
+    <h1 class="name-title">Ritik Jain</h1>
+    <p class="job-title">Software Developer & Prompt Engineer</p>
 
-  <!-- Summary -->
-  <div class="section">
-    <h2>Professional Summary</h2>
-    <p>
-      Aspiring Software Engineer with hands-on experience in building web applications using
-      React.js, Next.js, JavaScript, and TypeScript. Experience in backend development using
-      Node.js and Express.js, along with Python, Django, and basic Golang. Familiar with REST
-      API development, databases, and cloud fundamentals using AWS. Seeking opportunities to
-      contribute to scalable, real-world software solutions.
-    </p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <i class="bi bi-envelope-fill"></i>
+        <a href="mailto:jainritik829@gmail.com">jainritik829@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <i class="bi bi-telephone-fill"></i>
+        <span>+91 8518900153</span>
+      </div>
+      <div class="contact-item">
+        <i class="bi bi-geo-alt-fill"></i>
+        <span>Jabalpur, Madhya Pradesh</span>
+      </div>
+      <div class="contact-item">
+        <i class="bi bi-linkedin"></i>
+        <a href="https://www.linkedin.com/in/ritik-jain-451r1b/" target="_blank">LinkedIn</a>
+      </div>
+      <div class="contact-item">
+        <i class="bi bi-github"></i>
+        <a href="https://github.com/Ritikjain91" target="_blank">GitHub</a>
+      </div>
+      <div class="contact-item">
+        <i class="bi bi-globe"></i>
+        <a href="https://ritikportfolio-sepia.vercel.app/" target="_blank">Portfolio</a>
+      </div>
+    </div>
   </div>
 
-  <!-- Skills -->
-  <div class="section">
-    <h2>Technical Skills</h2>
-    <ul>
-      <li>Frontend: HTML, CSS, JavaScript, React.js, Next.js, TypeScript</li>
-      <li>Backend: Node.js, Express.js, Python, Django, Basic Golang</li>
-      <li>APIs: REST API Development, JSON, Authentication Basics</li>
-      <li>Databases: SQL, MongoDB</li>
-      <li>Cloud & DevOps: AWS (Basics), Docker</li>
-      <li>UI Libraries: Bootstrap, Tailwind CSS, very basic Chakra UI, Very basic Material UI</li>
-      <li>Mobile: React Native (Basics)</li>
-      <li>Tools: Git, GitHub, AI Tools (ChatGPT, Copilot),claude,Kimi Ai,Deepseek </li>
-      <li>Concepts: OOPs, Beginner DSA</li>
-    </ul>
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Professional Summary -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon"><i class="bi bi-person-fill"></i></div>
+        <h2 class="section-title">Professional Summary</h2>
+      </div>
+      <div class="summary-box">
+        Aspiring Software Engineer with hands-on experience in building web applications using React.js, Next.js, JavaScript, and TypeScript. Experience in backend development using Node.js and Express.js, along with Python, Django, and basic Golang. Skilled in <strong>Prompt Engineering</strong> for AI tools including ChatGPT, Claude, and Kimi AI. Familiar with REST API development, databases, and cloud fundamentals using AWS. Seeking opportunities to contribute to scalable, real-world software solutions while leveraging AI-enhanced development workflows.
+      </div>
+    </div>
+
+    <!-- Technical Skills -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon"><i class="bi bi-code-slash"></i></div>
+        <h2 class="section-title">Technical Skills</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <div class="skill-category-title">Frontend Development</div>
+          <div class="skill-list">HTML, CSS, JavaScript, React.js, Next.js, TypeScript</div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">Backend Development</div>
+          <div class="skill-list">Node.js, Express.js, Python, Django, Basic Golang</div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">APIs & Integration</div>
+          <div class="skill-list">REST API Development, JSON, Authentication Basics</div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">Databases</div>
+          <div class="skill-list">SQL, MongoDB, PostgreSQL</div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">Cloud & DevOps</div>
+          <div class="skill-list">AWS (Basics), Docker, Vercel, Netlify</div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">AI & Prompt Engineering</div>
+          <div class="skill-list">ChatGPT, Claude, Kimi AI, Copilot, Prompt Optimization, AI-Assisted Development</div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">UI Libraries</div>
+          <div class="skill-list">Bootstrap, Tailwind CSS, Chakra UI, Material UI</div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">Mobile & Tools</div>
+          <div class="skill-list">React Native (Basics), Git, GitHub, OOPs, Beginner DSA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon"><i class="bi bi-briefcase-fill"></i></div>
+        <h2 class="section-title">Work Experience</h2>
+      </div>
+
+      <div class="experience-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Professional Freelancer</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-date"><i class="bi bi-calendar3"></i> Jan 2022 – Present</span>
+          </div>
+        </div>
+        <ul class="exp-list">
+          <li>Frontend development & API integration for multiple client projects</li>
+          <li>Node.js backend support and server-side development</li>
+          <li>PostgreSQL database management and optimization</li>
+          <li>Cloud deployment & optimization on Vercel and Netlify</li>
+          <li>AI-assisted development using prompt engineering techniques</li>
+        </ul>
+      </div>
+
+      <div class="experience-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Sashakt</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-date"><i class="bi bi-calendar3"></i> July 2025 – Dec 2025</span>
+            <a href="https://drive.google.com/file/d/1UBGfjQ8tkxRA75yzRPH64LWj3tfNW5QE/view?usp=sharing" class="certificate-link" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Certificate</a>
+          </div>
+        </div>
+        <ul class="exp-list">
+          <li>Worked on frontend development and API integration tasks</li>
+          <li>Assisted in Node.js and Express.js based backend features</li>
+          <li>Improved collaboration and professional communication skills</li>
+        </ul>
+      </div>
+
+      <div class="experience-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Reak Infotech</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-date"><i class="bi bi-calendar3"></i> Feb 2025 – May 2025</span>
+            <a href="https://drive.google.com/file/d/1wQVT0O3BTPPp-2pdeRbyO584DdxvlfWy/view" class="certificate-link" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Certificate</a>
+          </div>
+        </div>
+        <ul class="exp-list">
+          <li>Worked on backend development using Python and Django</li>
+          <li>Built basic APIs and understood Node.js and Express.js workflows</li>
+          <li>Learned Docker fundamentals and basic Golang concepts</li>
+        </ul>
+      </div>
+
+      <div class="experience-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Yuvayana Tech and Craft Pvt. Ltd.</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-date"><i class="bi bi-calendar3"></i> Sep 2024 – Nov 2024</span>
+            <a href="https://drive.google.com/file/d/1ZhY6HwFxi-heAhvZWWGUsmBReIoUhpB3/view" class="certificate-link" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Certificate</a>
+          </div>
+        </div>
+        <ul class="exp-list">
+          <li>Built UI components using HTML, CSS, and Material UI</li>
+          <li>Improved UI/UX consistency across web pages</li>
+        </ul>
+      </div>
+
+      <div class="experience-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">AiSoft Software Solutions</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-date"><i class="bi bi-calendar3"></i> Mar 2024 – Aug 2024</span>
+            <a href="https://drive.google.com/file/d/1yd-Y7hgEgHbUSl9_aVdjDU3phssPmY9d/view" class="certificate-link" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Certificate</a>
+          </div>
+        </div>
+        <ul class="exp-list">
+          <li>Developed and maintained real-time web applications</li>
+          <li>Worked with REST APIs and backend integration</li>
+          <li>Collaborated using Agile methodology and Git</li>
+        </ul>
+      </div>
+
+      <div class="experience-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Avestian Technology</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-date"><i class="bi bi-calendar3"></i> Nov 2023 – Feb 2024</span>
+            <a href="https://drive.google.com/file/d/1okJAWaP_EnXzmO-XOpDwrlFTN2sedqJy/view" class="certificate-link" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Certificate</a>
+          </div>
+        </div>
+        <ul class="exp-list">
+          <li>Worked on web application development using React.js</li>
+          <li>Learned Chakra UI and component-based architecture</li>
+          <li>Contributed to real-time application features</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon"><i class="bi bi-kanban-fill"></i></div>
+        <h2 class="section-title">Projects</h2>
+      </div>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-title">Netflix Clone</div>
+          <a href="https://669a316e28818db0ae4f9f2e--cute-cascaron-e7c739.netlify.app/" class="project-link" target="_blank"><i class="bi bi-link-45deg"></i> Live Demo</a>
+          <div class="project-desc">Built a streaming UI using React.js with Firebase authentication and TMDB API integration</div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title">Movie App</div>
+          <a href="https://ritikjain91.github.io/MovieApp/" class="project-link" target="_blank"><i class="bi bi-link-45deg"></i> Live Demo</a>
+          <div class="project-desc">Developed a movie listing application using HTML, CSS, JavaScript with dynamic TMDB API data</div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title">Company Website</div>
+          <a href="https://profound-douhua-2992fc.netlify.app/" class="project-link" target="_blank"><i class="bi bi-link-45deg"></i> Live Demo</a>
+          <div class="project-desc">Created a corporate website using React.js and modern CSS styling</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon"><i class="bi bi-mortarboard-fill"></i></div>
+        <h2 class="section-title">Education</h2>
+      </div>
+
+      <div class="education-item">
+        <div class="edu-info">
+          <h4>B.Tech in Computer Science</h4>
+          <div class="edu-school">Shri Ram Institute of Technology, Jabalpur (2019 – 2023)</div>
+        </div>
+        <div class="edu-grade">
+          <span class="grade-badge">CGPA: 7.81</span>
+        </div>
+      </div>
+
+      <div class="education-item">
+        <div class="edu-info">
+          <h4>Class 12 (PCM)</h4>
+          <div class="edu-school">Takshila Higher Secondary School (2018 – 2019)</div>
+        </div>
+        <div class="edu-grade">
+          <span class="grade-badge">68%</span>
+        </div>
+      </div>
+
+      <div class="education-item">
+        <div class="edu-info">
+          <h4>Class 10</h4>
+          <div class="edu-school">Marthoma Gram Jyoti School (2015 – 2016)</div>
+        </div>
+        <div class="edu-grade">
+          <span class="grade-badge">CGPA: 7.8</span>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-  <!-- Work Experience -->
-  <div class="section">
-    <h2>Work Experience</h2>
-
-    <h3>Avestian Technology</h3>
-    <p class="text-muted">Nov 2023 – Feb 2024 |
-      <a href="https://drive.google.com/file/d/1okJAWaP_EnXzmO-XOpDwrlFTN2sedqJy/view">Certificate</a>
-    </p>
-    <ul>
-      <li>Worked on web application development using React.js</li>
-      <li>Learned Chakra UI and component-based architecture</li>
-      <li>Contributed to real-time application features</li>
-    </ul>
-
-    <h3>AiSoft Software Solutions</h3>
-    <p class="text-muted">Mar 2024 – Aug 2024 |
-      <a href="https://drive.google.com/file/d/1yd-Y7hgEgHbUSl9_aVdjDU3phssPmY9d/view">Certificate</a>
-    </p>
-    <ul>
-      <li>Developed and maintained real-time web applications</li>
-      <li>Worked with REST APIs and backend integration</li>
-      <li>Collaborated using Agile methodology and Git</li>
-    </ul>
-
-    <h3>Yuvayana Tech and Craft Pvt. Ltd.</h3>
-    <p class="text-muted">Sep 2024 – Nov 2024 |
-      <a href="https://drive.google.com/file/d/1ZhY6HwFxi-heAhvZWWGUsmBReIoUhpB3/view">Certificate</a>
-    </p>
-    <ul>
-      <li>Built UI components using HTML, CSS, and Material UI</li>
-      <li>Improved UI/UX consistency across web pages</li>
-    </ul>
-
-    <h3>Reak Infotech</h3>
-    <p class="text-muted">Feb 2025 – May 2025 |
-      <a href="https://drive.google.com/file/d/1wQVT0O3BTPPp-2pdeRbyO584DdxvlfWy/view">Certificate</a>
-    </p>
-    <ul>
-      <li>Worked on backend development using Python and Django</li>
-      <li>Built basic APIs and understood Node.js and Express.js workflows</li>
-      <li>Learned Docker fundamentals and basic Golang concepts</li>
-    </ul>
-
-    <h3>Sashakt</h3>
-        <p class="text-muted">July 2025 – Dec 2025 |
-      <a href="https://drive.google.com/file/d/1UBGfjQ8tkxRA75yzRPH64LWj3tfNW5QE/view?usp=sharing">Certificate</a>
-    </p>
-    <ul>
-      <li>Worked on frontend development and API integration tasks</li>
-      <li>Assisted in Node.js and Express.js based backend features</li>
-      <li>Improved collaboration and professional communication skills</li>
-    </ul>
-
-       <h3>Professional freelancer with different organisation </h3>
-        <p class="text-muted">Jan 2022 – present |
-      <!-- <a href="">Certificate</a> -->
-    </p>
-   <ul>
-  <li>Frontend development & API integration</li>
-  <li>Node.js backend support</li>
-  <li>PostgreSQL database management</li>
-  <li>Cloud deployment & optimization</li>
-</ul>
-
-  </div>
-
-  <!-- Projects -->
-  <div class="section">
-    <h2>Projects</h2>
-
-    <h3>Netflix Clone</h3>
-    <p class="text-muted">
-      <a href="https://669a316e28818db0ae4f9f2e--cute-cascaron-e7c739.netlify.app/">Live Project</a>
-    </p>
-    <ul>
-      <li>Built a streaming UI using React.js</li>
-      <li>Integrated Firebase authentication and TMDB API</li>
-    </ul>
-
-    <h3>Movie App</h3>
-    <p class="text-muted">
-      <a href="https://ritikjain91.github.io/MovieApp/">Live Project</a>
-    </p>
-    <ul>
-      <li>Developed a movie listing application using HTML, CSS, JavaScript</li>
-      <li>Fetched dynamic data using TMDB API</li>
-    </ul>
-
-    <h3>Company Website</h3>
-    <p class="text-muted">
-      <a href="https://profound-douhua-2992fc.netlify.app/">Live Project</a>
-    </p>
-    <ul>
-      <li>Created a corporate website using React.js and CSS</li>
-    </ul>
-  </div>
-
-  <!-- Education -->
-  <div class="section">
-    <h2>Education</h2>
-
-    <h3>B.Tech in Computer Science</h3>
-    <p class="text-muted">Shri Ram Institute of Technology, Jabalpur (2019 – 2023)</p>
-    <ul>
-      <li>CGPA: 7.81</li>
-    </ul>
-
-    <h3>Class 12 (PCM)</h3>
-    <p class="text-muted">Takshila Higher Secondary School (2018 – 2019)</p>
-    <ul>
-      <li>Percentage: 68%</li>
-    </ul>
-
-    <h3>Class 10</h3>
-    <p class="text-muted">Marthoma Gram Jyoti School (2015 – 2016)</p>
-    <ul>
-      <li>CGPA: 7.8</li>
-    </ul>
-  </div>
-
 </div>
 </body>
 </html>
