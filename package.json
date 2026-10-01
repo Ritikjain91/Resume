@@ -1,4 +1,9 @@
 {
+  "name": "resume",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node Server.js"
+  },
   "dependencies": {
     "express": "^4.19.2"
   }

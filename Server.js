@@ -35,6 +35,18 @@ app.get('/download/css', (req, res) => {
     });
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Resume server running at http://localhost:${port}`);
+});
+
+server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+        const altPort = 5000;
+        console.log(`Port ${port} is already in use. Starting resume server on http://localhost:${altPort} instead.`);
+        app.listen(altPort, () => {
+            console.log(`Resume server running at http://localhost:${altPort}`);
+        });
+    } else {
+        console.error('Server error:', err);
+    }
 });
