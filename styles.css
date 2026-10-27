@@ -33,6 +33,13 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Keep resume content selectable and copyable across browsers and devices. */
+.resume-wrapper,
+.resume-wrapper * {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
 /* --------------------------------------------------------------------------
    Interactive Action Toolbar (Hidden during Print)
    -------------------------------------------------------------------------- */

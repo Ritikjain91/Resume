@@ -23,9 +23,9 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                 Print / Save PDF
             </button>
-            <button class="btn btn-secondary" onclick="copyAtsText()" title="Copy clean ATS text to paste into job applications">
+            <button class="btn btn-secondary" onclick="copyAtsText()" title="Copy the current resume text to paste into job applications">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                Copy ATS Plain Text
+                Copy Resume Text
             </button>
             <a href="https://ritikportfolio-sepia.vercel.app/" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                 🌐 Tech Portfolio
@@ -33,11 +33,14 @@
             <a href="https://graphic-design-portfolio-virid.vercel.app/" class="btn btn-accent" target="_blank" rel="noopener noreferrer">
                 🎨 Graphic Design Portfolio
             </a>
+            <a href="https://www.instagram.com/animatedstories_by_ritik/" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                Instagram
+            </a>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="toast-msg">✅ ATS Plain Text copied to clipboard! Ready to paste.</div>
+    <div id="toast" class="toast-msg" role="status" aria-live="polite">Resume text copied to clipboard.</div>
 
     <!-- Printable Resume Paper Container -->
     <main class="resume-wrapper">
@@ -64,6 +67,8 @@
                 <span class="contact-item">Software Portfolio: <a href="https://ritikportfolio-sepia.vercel.app/">ritikportfolio-sepia.vercel.app</a></span>
                 <span class="contact-separator">•</span>
                 <span class="contact-item">Design Portfolio: <a href="https://graphic-design-portfolio-virid.vercel.app/">graphic-design-portfolio-virid.vercel.app</a></span>
+                <span class="contact-separator">•</span>
+                <span class="contact-item">Instagram: <a href="https://www.instagram.com/animatedstories_by_ritik/">@animatedstories_by_ritik</a></span>
             </div>
         </header>
 
@@ -360,142 +365,72 @@
 
     <!-- Plain-Text ATS Copy Handler Script -->
     <script>
-        function copyAtsText() {
-            const atsText = `RITIK JAIN
-Software Engineer | Full Stack & Frontend Developer
-Jabalpur, Madhya Pradesh, India | +91 8518900153 | jainritik829@gmail.com
-LinkedIn: https://www.linkedin.com/in/ritik-jain-451r1b/
-GitHub: https://github.com/Ritikjain91
-Software Portfolio: https://ritikportfolio-sepia.vercel.app/
-Graphic Design Portfolio: https://graphic-design-portfolio-virid.vercel.app/
+        let toastTimeout;
 
-PROFESSIONAL SUMMARY
-Results-driven Software Engineer with proven experience designing, developing, and deploying scalable web applications and RESTful APIs using React.js, Next.js, TypeScript, JavaScript (ES6+), Node.js, Express.js, and Python/Django. Experienced in managing PostgreSQL and SQL databases, configuring containerized microservices with Docker, and deploying cloud services on AWS, Vercel, Netlify, and Render. Combines strong computer science fundamentals in Data Structures, Algorithms, and Object-Oriented Programming with high-impact UI/UX and graphic design proficiency (Canva, modern design systems, generative AI tools) to craft responsive, visually engaging, and high-performance digital products.
+        function showCopyToast(message, success) {
+            const toast = document.getElementById('toast');
+            if (!toast) return;
 
-TECHNICAL SKILLS
-- Languages: JavaScript (ES6+), TypeScript, Python, Golang, SQL, HTML5, CSS3
-- Frontend Development: React.js, Next.js, Redux Toolkit, Context API, Tailwind CSS, Bootstrap, Material UI, Chakra UI, Responsive Design, Web Performance
-- Backend & APIs: Node.js, Express.js, Python (Django), RESTful APIs, Microservices, JSON, JWT Authentication, Session Management, WebSockets
-- Databases & Cloud: PostgreSQL, MongoDB, MySQL, AWS (EC2, S3), Docker, Linux, CI/CD, Git, GitHub, Vercel, Netlify, Render
-- UI/UX & Creative Design: Canva, Figma, UI/UX Wireframing, Visual Brand Identity, High-CTR Thumbnail Design, Typography, Asset Optimization
-- Productivity & Office Tools: Microsoft Excel (MS Excel), Google Sheets, Microsoft PowerPoint (Presentations & Slide Decks)
-- AI & Developer Tools: Antigravity, Cursor, Google Gemini, Claude, ChatGPT, DeepSeek, GitHub Copilot, Postman, VS Code, Prompt Engineering
-- Core CS & Practices: Data Structures & Algorithms (DSA), Object-Oriented Programming (OOP), Agile/Scrum, SDLC, Code Reviews, Cross-Browser Compatibility
+            toast.textContent = message;
+            toast.style.borderLeftColor = success ? '#10b981' : '#ef4444';
+            toast.style.display = 'block';
+            window.clearTimeout(toastTimeout);
+            toastTimeout = window.setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3500);
+        }
 
-PROFESSIONAL EXPERIENCE
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.setAttribute('readonly', '');
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            textArea.setSelectionRange(0, textArea.value.length);
 
-Software Developer Intern | California Private Limited
-April 2026 – May 2026 | California, USA (Remote | Contract-based Internship)
-- Engineered responsive web interfaces and modular, reusable UI components using React.js, JavaScript (ES6+), HTML5, and CSS3, increasing feature delivery velocity by 25%.
-- Implemented scalable component hierarchy and state management in React.js, ensuring 100% cross-browser compatibility and adherence to clean architecture principles.
-- Managed Git and GitHub version control workflows, participating in pull request reviews, automated branch deployments, and multi-developer team collaboration.
-- Delivered contract milestones on schedule, focusing on client-side performance tuning, bundle optimization, and seamless user experience.
-
-Freelance Full Stack / Software Developer | Independent Client Engagements
-Dec 2024 – April 2026 | Remote
-- Architected and delivered end-to-end full-stack web applications for commercial clients using React.js, Next.js, Node.js, Express.js, and TypeScript.
-- Designed and integrated secure RESTful APIs with JWT authentication, role-based access controls (RBAC), and data validation middleware.
-- Administered PostgreSQL database schemas, optimizing complex query execution plans and database migrations to decrease query latency by 35%.
-- Configured automated CI/CD deployment pipelines on AWS, Vercel, Netlify, and Render, reducing deployment cycle times while integrating custom UI/UX design assets crafted with Canva.
-
-Software Developer Intern | Sashakt
-July 2025 – December 2025
-- Developed responsive client-side features and integrated REST APIs with Node.js and Express.js backend microservices.
-- Diagnosed and resolved critical frontend and backend bottlenecks, optimizing database queries and boosting overall application speed by 30%.
-- Collaborated in an Agile/Scrum environment with daily standups, sprint retrospectives, and Git feature-branch workflows.
-- Enhanced user retention by improving web accessibility, error-boundary handling, and intuitive UI interactions.
-
-Backend Developer Intern | Reak Infotech
-February 2025 – May 2025
-- Constructed robust backend services and RESTful APIs using Python and Django, supporting data-intensive enterprise client workflows.
-- Implemented Docker containerization for consistent development environments and explored Golang concurrency models for backend microservices.
-- Conducted database schema migrations and tuned relational SQL queries, cutting data retrieval times by 28%.
-- Created comprehensive API documentation and automated endpoint testing collections in Postman for QA verification.
-
-Frontend Developer Intern | Yuvayana Tech and Craft Pvt. Ltd.
-September 2024 – November 2024
-- Built pixel-perfect, accessible UI components with HTML5, CSS3, JavaScript, and Material UI across web portals.
-- Collaborated with design teams to translate wireframes into intuitive user flows, ensuring brand consistency and design system compliance.
-- Integrated dynamic REST API endpoints into React components, handling real-time data binding, loading states, and exception boundaries.
-- Improved mobile responsiveness and cross-browser rendering reliability, leading to a 20% increase in mobile user engagement.
-
-Full Stack Developer Intern | AiSoft Software Solutions
-March 2024 – August 2024
-- Engineered full-stack features for production web applications leveraging React.js, Node.js, Express.js, and MongoDB.
-- Implemented secure user authentication and authorization using JWT and session tokens, guarding sensitive API endpoints.
-- Coordinated with Agile teams using Git and GitHub, leading code reviews and standardizing clean coding guidelines.
-- Refactored legacy database models and API controllers, optimizing CRUD operations for high-concurrency requests.
-
-Frontend Developer Intern | Avestian Technology
-November 2023 – February 2024
-- Built responsive single-page web applications (SPAs) with React.js and Chakra UI, improving user interaction speed.
-- Managed component-level and application-wide state, enabling responsive real-time data updates without unnecessary re-renders.
-- Identified and resolved frontend layout discrepancies and browser incompatibilities across major web browsers.
-
-FEATURED PROJECTS
-
-Graphic Design & Creative Portfolio Platform (Next.js, React, Tailwind CSS, Vercel, Canva)
-Live: https://graphic-design-portfolio-virid.vercel.app/
-- Designed and deployed a modern, production-grade visual design showcase exhibiting 14+ curated design assets, YouTube thumbnails, and corporate branding projects.
-- Engineered an ultra-fast Next.js web application with Tailwind CSS, category filtering, smooth modal inspections, and dark-mode aesthetic.
-- Utilized Canva and Generative AI (Gemini, Claude, DeepSeek) to conceptualize and craft high-CTR marketing thumbnails and brand identity systems.
-
-Netflix Streaming Platform Application (React.js, Redux, Firebase, TMDB API, Netlify)
-Live: https://669a316e28818db0ae4f9f2e--cute-cascaron-e7c739.netlify.app/
-- Architected an interactive video streaming UI with React.js and Redux for centralized state management of dynamic movie categories.
-- Integrated Firebase Authentication to provide secure email registration, session persistence, and custom user profiles.
-- Fetched and rendered real-time movie and TV show data via TMDB REST API, supporting dynamic search, trailers, and responsive media carousels.
-
-Movie Discovery & Search Portal (JavaScript, HTML5, CSS3, TMDB API)
-Live: https://ritikjain91.github.io/MovieApp/
-- Engineered a fast, lightweight movie exploration application utilizing vanilla JavaScript and asynchronous Fetch API pipelines.
-- Implemented real-time search filtering with debouncing logic to minimize redundant network requests and optimize API quota usage.
-
-Corporate Business Web Portal (React.js, CSS3, Responsive Design, Netlify)
-Live: https://profound-douhua-2992fc.netlify.app/
-- Developed an elegant, high-conversion commercial website showcasing corporate services, modern animations, and responsive layout structures.
-- Optimized asset loading and CSS delivery, securing near-perfect Google Lighthouse scores in accessibility and SEO.
-
-EDUCATION
-- Bachelor of Technology (B.Tech) in Computer Science and Engineering | Shri Ram Institute of Technology, Jabalpur (2019 – 2023) | CGPA: 7.81 / 10.0
-- Senior Secondary Education (Class XII), PCM | Takshila Higher Secondary School, Jabalpur (2018 – 2019) | 68%
-- Secondary Education (Class X) | Marthoma Gram Jyoti School, Jabalpur (2015 – 2016) | CGPA: 7.8 / 10.0`;
-
-            const showToast = () => {
-                const toast = document.getElementById('toast');
-                if (toast) {
-                    toast.style.display = 'block';
-                    setTimeout(() => {
-                        toast.style.display = 'none';
-                    }, 3500);
-                }
-            };
-
-            function fallbackCopy(text) {
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-999999px';
-                textArea.style.top = '-999999px';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    showToast();
-                } catch (err) {
-                    console.error('Fallback copy failed', err);
-                }
-                document.body.removeChild(textArea);
+            let copied = false;
+            try {
+                copied = document.execCommand('copy');
+            } catch (error) {
+                console.error('Fallback copy failed', error);
             }
 
+            textArea.remove();
+            return copied;
+        }
+
+        async function copyAtsText() {
+            const resume = document.querySelector('.resume-wrapper');
+            const atsText = (resume?.innerText || resume?.textContent || '')
+                .replace(/\u00a0/g, ' ')
+                .replace(/[ \t]+\n/g, '\n')
+                .replace(/\n{3,}/g, '\n\n')
+                .trim();
+
+            if (!atsText) {
+                showCopyToast('Could not find resume text to copy.', false);
+                return;
+            }
+
+            let copied = false;
             if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(atsText)
-                    .then(showToast)
-                    .catch(() => fallbackCopy(atsText));
-            } else {
-                fallbackCopy(atsText);
+                try {
+                    await navigator.clipboard.writeText(atsText);
+                    copied = true;
+                } catch (error) {
+                    // Try the fallback for browsers that deny clipboard permission.
+                }
             }
+
+            if (!copied) copied = fallbackCopy(atsText);
+            showCopyToast(
+                copied ? 'Resume text copied to clipboard.' : 'Copy failed. Select the resume text and copy it manually.',
+                copied
+            );
         }
     </script>
 </body>
